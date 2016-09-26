@@ -1,0 +1,1 @@
+﻿$mailboxes = Get-Mailbox -OrganizationalUnit "ou=Disabled Accounts,dc=wmtracey,dc=local" | get-mailbox  | where {$_.HiddenFromAddressListsEnabled -eq $false}; foreach ($mailbox in $mailboxes) { Set-Mailbox -Identity $mailbox -HiddenFromAddressListsEnabled $true }
