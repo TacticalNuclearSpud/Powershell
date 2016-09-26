@@ -15,10 +15,13 @@ param (
     [Parameter(Mandatory=$True)]
     [string]$computername
 )
+
+$currentuser = [Environment]::UserName
+
 #list user profiles excluding service accounts any local accounts and my own admin account.
 Get-WmiObject -Class win32_userprofile -ComputerName $computername | `
     Where-Object -Filter {$_.RoamingConfigured -eq $true} | `
-        Where-Object -Filter {$_.LocalPath -notlike '*mike.brankin.admin*'} | `
+        Where-Object -Filter {$_.LocalPath -notlike "*$currentuser*"} | `
 
         #loop through profiles, remove profile and delete folder.
         ForEach-Object {
