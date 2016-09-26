@@ -3,7 +3,7 @@
 
 Clean-RSServer removes leftover profiles from Remote Desktop Services Farm Server. 
 .DESCRIPTION
-Clean-RDServer pulls a list of leftover roaming profiles from the named server and removes them, with the exception of my own admin account
+Clean-RDServer pulls a list of leftover roaming profiles from the named server and removes them, with the exception of account used to run script
 .PARAMETER computername
 The name of the Remote Desktop Services Server to clean.
 .EXAMPLE
