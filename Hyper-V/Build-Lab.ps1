@@ -3,7 +3,7 @@
 
 .DESCRIPTION
 
-.PARAMETER vmname
+.PARAMETER computername
 Name of VM or VMs you wish to create.
 
 .PARAMETER master
@@ -16,13 +16,13 @@ Path to VHD storage
 Generation 1 or 2 VM. Default 1.
 
 .EXAMPLE
-Build-lab -VMName SERVER-1, SERVER-2 -Master "E:\MASTER.vhdx" -VHDPath "E:\VHDS\"
+Build-lab -ComputerName SERVER-1, SERVER-2 -Master "E:\MASTER.vhdx" -VHDPath "E:\VHDS\"
 #>
 [CmdletBinding()]
 
 param (
     [Parameter(Mandatory=$True)]
-    [array]$vmname,
+    [array]$computername,
 
     [Parameter(Mandatory=$True)]
     [string]$master,
@@ -35,7 +35,7 @@ param (
 
 )
 
-$vmname | Foreach-object {
+$computername | Foreach-object {
 
     #set destination directory for new vhdx files
     $destination = "$vhdpath$_.vhdx"
