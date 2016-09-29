@@ -12,6 +12,9 @@ Path to master vhd
 .PARAMETER vhdpath
 Path to VHD storage
 
+.PARAMETER generation
+Generation 1 or 2 VM. Default 1.
+
 .EXAMPLE
 Build-lab -VMName SERVER-1, SERVER-2 -Master "E:\MASTER.vhdx" -VHDPath "E:\VHDS\"
 #>
@@ -25,7 +28,9 @@ param (
     [string]$master,
 
     [Parameter(Mandatory=$True)]
-    [array]$vhdpath
+    [array]$vhdpath,
+
+    [int]$generation = 1
    
 
 )
@@ -41,7 +46,7 @@ $vmname | Foreach-object {
 
     #create VM's
     Write-Verbose "Creating $_ VM"
-    New-VM -Name $_ -MemoryStartupBytes 800MB -Generation 2 -BootDevice VHD -SwitchName Contoso -VHDPath $destination
+    New-VM -Name $_ -MemoryStartupBytes 800MB -Generation $generation -BootDevice VHD -SwitchName Contoso -VHDPath $destination
 
     #Set dynamic memory, min and max
     Write-Verbose "Setting dynamic memory min and max for VM $_"
